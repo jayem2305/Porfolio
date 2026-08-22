@@ -13,7 +13,7 @@ export const profile = {
 
 export const skills = {
   main: ["Laravel", "Vue", "Xano", "Python", "MySQL", "Stripe", "Bootstrap"],
-  familiar: ["Figma", "Flutter", "React", "Next.js"],
+  familiar: ["Figma", "Flutter", "React", "Next.js", "Drupal"],
 };
 
 export type Project = {
@@ -128,6 +128,32 @@ export const projects: Project[] = [
       "Authorized employees monitor equipment check-ins and check-outs",
       "Tracks rental transactions and equipment availability",
       "Generates detailed invoices for clients",
+    ],
+  },
+  {
+    name: "Barangay Pio del Pilar & FS Belinario Landing Pages",
+    category: "Work",
+    role: "UI/UX Designer (Internship)",
+    timeline: "1 month",
+    description:
+      "Designed and built public-facing landing pages for Barangay Pio del Pilar and Barangay FS Belinario using Drupal, during a UI/UX internship.",
+    highlights: [
+      "Built with Drupal CMS",
+      "Clean, accessible public-facing design for two barangay clients",
+      "Delivered during a UI/UX internship",
+    ],
+  },
+  {
+    name: "Archiving System",
+    category: "Work",
+    role: "Lead Developer (Internship)",
+    timeline: "2 months",
+    description:
+      "A document and records archiving system built during the same internship, helping the organization store, organize, and retrieve records efficiently.",
+    highlights: [
+      "Centralized storage for organizational documents and records",
+      "Organized retrieval and search of archived files",
+      "Built as lead developer during a 2-month internship engagement",
     ],
   },
 ];

@@ -10,6 +10,7 @@ import {
   SiFlutter,
   SiReact,
   SiNextdotjs,
+  SiDrupal,
 } from "react-icons/si";
 import { Database, Briefcase, GraduationCap, Store, Smartphone } from "lucide-react";
 import type { Project } from "@/lib/data";
@@ -28,6 +29,7 @@ export const skillIcons: Record<string, IconComponent> = {
   Flutter: SiFlutter,
   React: SiReact,
   "Next.js": SiNextdotjs,
+  Drupal: SiDrupal,
 };
 
 export const categoryIcons: Record<Project["category"], IconComponent> = {
