@@ -11,7 +11,7 @@ export default function ThemeToggle() {
   useEffect(() => setMounted(true), []);
 
   if (!mounted) {
-    return <div className="h-9 w-9 rounded-lg border border-border" />;
+    return <div className="h-9 w-9 rounded-xl border-2 border-foreground" />;
   }
 
   const isDark = resolvedTheme === "dark";
@@ -21,7 +21,7 @@ export default function ThemeToggle() {
       type="button"
       onClick={() => setTheme(isDark ? "light" : "dark")}
       aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
-      className="flex h-9 w-9 items-center justify-center rounded-lg border border-border bg-surface text-foreground transition-colors hover:bg-surface-hover"
+      className="cartoon-pop-sm flex h-9 w-9 items-center justify-center rounded-xl border-2 border-foreground bg-surface text-foreground transition-colors hover:bg-surface-hover"
     >
       {isDark ? <Sun className="h-4.5 w-4.5" /> : <Moon className="h-4.5 w-4.5" />}
     </button>

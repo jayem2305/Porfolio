@@ -3,27 +3,31 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 :root {
-  --background: #ffffff;
-  --surface: #f5f5f7;
-  --surface-hover: #ececf1;
-  --border: #e3e3e9;
-  --foreground: #14141a;
-  --muted: #5c5c6b;
-  --accent: #059669;
-  --accent-strong: #047857;
-  --accent-secondary: #2563eb;
+  --background: #fffdf7;
+  --surface: #fff6e0;
+  --surface-hover: #ffedc2;
+  --border: #1f2937;
+  --ink: #1f2937;
+  --foreground: #211a12;
+  --muted: #6b6255;
+  --accent: #8b5cf6;
+  --accent-strong: #7c3aed;
+  --accent-secondary: #fb923c;
+  --shadow-color: rgba(31, 41, 55, 0.9);
 }
 
 .dark {
-  --background: #0a0a0f;
-  --surface: #12121a;
-  --surface-hover: #181822;
-  --border: #24242f;
-  --foreground: #f4f4f6;
-  --muted: #9a9aa8;
-  --accent: #6ee7b7;
-  --accent-strong: #34d399;
-  --accent-secondary: #60a5fa;
+  --background: #1a1523;
+  --surface: #241b32;
+  --surface-hover: #2f2440;
+  --border: #4c3d68;
+  --ink: #f4f0ff;
+  --foreground: #f4f0ff;
+  --muted: #b3a6cc;
+  --accent: #a78bfa;
+  --accent-strong: #c4b5fd;
+  --accent-secondary: #fdba74;
+  --shadow-color: color-mix(in srgb, var(--accent) 45%, transparent);
 }
 
 @theme inline {
@@ -31,13 +35,14 @@
   --color-surface: var(--surface);
   --color-surface-hover: var(--surface-hover);
   --color-border: var(--border);
+  --color-ink: var(--ink);
   --color-foreground: var(--foreground);
   --color-muted: var(--muted);
   --color-accent: var(--accent);
   --color-accent-strong: var(--accent-strong);
   --color-accent-secondary: var(--accent-secondary);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-heading: var(--font-baloo);
+  --font-body: var(--font-nunito);
 }
 
 * {
@@ -47,22 +52,42 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  font-family: var(--font-body), Arial, Helvetica, sans-serif;
   transition: background-color 0.2s ease, color 0.2s ease;
 }
 
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-heading), var(--font-body), sans-serif;
+}
+
 .section-fade {
-  animation: fade-up 0.6s ease-out both;
+  animation: fade-up 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) both;
 }
 
 @keyframes fade-up {
   from {
     opacity: 0;
-    transform: translateY(16px);
+    transform: translateY(20px) scale(0.98);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes wiggle {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-4deg);
+  }
+  75% {
+    transform: rotate(4deg);
   }
 }
 
@@ -73,24 +98,17 @@ body {
   color: transparent;
 }
 
-.bg-grid {
-  background-image:
-    linear-gradient(to right, var(--border) 1px, transparent 1px),
-    linear-gradient(to bottom, var(--border) 1px, transparent 1px);
-  background-size: 56px 56px;
-  mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, black 40%, transparent 100%);
-  opacity: 0.5;
-}
-
 .reveal {
   opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  transform: translateY(24px) scale(0.97);
+  transition:
+    opacity 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
+    transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .reveal.is-visible {
   opacity: 1;
-  transform: translateY(0);
+  transform: translateY(0) scale(1);
 }
 
 .spotlight-card {
@@ -108,13 +126,76 @@ body {
   transition: opacity 0.3s ease;
   background: radial-gradient(
     240px circle at var(--spot-x, 50%) var(--spot-y, 50%),
-    color-mix(in srgb, var(--accent) 15%, transparent),
+    color-mix(in srgb, var(--accent) 20%, transparent),
     transparent 70%
   );
 }
 
 .spotlight-card:hover::before {
   opacity: 1;
+}
+
+.cartoon-pop {
+  box-shadow: 4px 4px 0 0 var(--shadow-color);
+  transition:
+    transform 0.15s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.15s ease;
+}
+
+.cartoon-pop:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 0 var(--shadow-color);
+}
+
+.cartoon-pop:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0 0 var(--shadow-color);
+}
+
+.cartoon-pop-sm {
+  box-shadow: 3px 3px 0 0 var(--shadow-color);
+  transition:
+    transform 0.15s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.15s ease;
+}
+
+.cartoon-pop-sm:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 4px 4px 0 0 var(--shadow-color);
+}
+
+.pacman-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.spark-wrap {
+  position: absolute;
+  width: 0;
+  height: 0;
+}
+
+.spark-line {
+  position: absolute;
+  left: -2px;
+  top: -18px;
+  width: 4px;
+  height: 12px;
+  border-radius: 2px;
+  animation: spark-shoot 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes spark-shoot {
+  from {
+    transform: translateY(0) scaleY(1);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-26px) scaleY(0.4);
+    opacity: 0;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
