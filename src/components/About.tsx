@@ -1,5 +1,30 @@
 import { skills } from "@/lib/data";
+import { skillIcons } from "@/lib/icons";
 import Reveal from "@/components/Reveal";
+
+function SkillChip({
+  skill,
+  variant,
+}: {
+  skill: string;
+  variant: "main" | "familiar";
+}) {
+  const Icon = skillIcons[skill];
+  const isMain = variant === "main";
+
+  return (
+    <span
+      className={
+        isMain
+          ? "flex items-center gap-2 rounded-full border border-accent/30 bg-accent/10 px-3.5 py-1.5 text-sm text-accent-strong transition-transform hover:-translate-y-0.5 hover:bg-accent/20 dark:text-accent"
+          : "flex items-center gap-2 rounded-full border border-border bg-surface px-3.5 py-1.5 text-sm text-muted transition-transform hover:-translate-y-0.5 hover:bg-surface-hover"
+      }
+    >
+      {Icon && <Icon className="h-4 w-4" />}
+      {skill}
+    </span>
+  );
+}
 
 export default function About() {
   return (
@@ -29,12 +54,7 @@ export default function About() {
           </h3>
           <div className="flex flex-wrap gap-2">
             {skills.main.map((skill) => (
-              <span
-                key={skill}
-                className="rounded-full border border-accent/30 bg-accent/10 px-3 py-1 text-sm text-accent-strong transition-colors hover:bg-accent/20 dark:text-accent"
-              >
-                {skill}
-              </span>
+              <SkillChip key={skill} skill={skill} variant="main" />
             ))}
           </div>
         </Reveal>
@@ -45,12 +65,7 @@ export default function About() {
           </h3>
           <div className="flex flex-wrap gap-2">
             {skills.familiar.map((skill) => (
-              <span
-                key={skill}
-                className="rounded-full border border-border bg-surface px-3 py-1 text-sm text-muted transition-colors hover:bg-surface-hover"
-              >
-                {skill}
-              </span>
+              <SkillChip key={skill} skill={skill} variant="familiar" />
             ))}
           </div>
         </Reveal>

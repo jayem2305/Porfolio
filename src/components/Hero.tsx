@@ -1,5 +1,23 @@
 import Link from "next/link";
-import { profile, skills } from "@/lib/data";
+import { profile, skills, projects } from "@/lib/data";
+
+const stats = [
+  { label: "Projects shipped", value: `${projects.length}+` },
+  { label: "Core technologies", value: `${skills.main.length}` },
+  {
+    label: "Project categories",
+    value: `${new Set(projects.map((p) => p.category)).size}`,
+  },
+];
+
+function initials(name: string) {
+  return name
+    .split(" ")
+    .map((part) => part[0])
+    .slice(0, 2)
+    .join("")
+    .toUpperCase();
+}
 
 export default function Hero() {
   return (
@@ -19,10 +37,15 @@ export default function Hero() {
 
       <div className="relative mx-auto grid max-w-5xl gap-12 px-6 pb-20 pt-16 sm:pt-24 lg:grid-cols-[1.2fr_1fr] lg:items-center">
         <div className="flex flex-col items-start gap-6">
-          <p className="flex items-center gap-2 rounded-full border border-border bg-surface px-4 py-1 text-sm text-muted">
-            <span className="h-2 w-2 rounded-full bg-accent" />
-            Available for new opportunities
-          </p>
+          <div className="flex items-center gap-4">
+            <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-linear-to-br from-accent to-accent-secondary text-lg font-bold text-white shadow-lg shadow-accent/20">
+              {initials(profile.name)}
+            </span>
+            <p className="flex items-center gap-2 rounded-full border border-border bg-surface px-4 py-1 text-sm text-muted">
+              <span className="h-2 w-2 rounded-full bg-accent" />
+              Available for new opportunities
+            </p>
+          </div>
           <h1 className="text-4xl font-bold tracking-tight sm:text-6xl">
             Hi, I&apos;m <span className="glow-text">{profile.name}</span>
           </h1>
@@ -45,6 +68,17 @@ export default function Hero() {
             >
               Get in touch
             </Link>
+          </div>
+
+          <div className="mt-4 flex flex-wrap gap-8 border-t border-border/60 pt-6">
+            {stats.map((stat) => (
+              <div key={stat.label}>
+                <p className="text-2xl font-bold text-foreground">
+                  {stat.value}
+                </p>
+                <p className="text-sm text-muted">{stat.label}</p>
+              </div>
+            ))}
           </div>
         </div>
 

@@ -1,14 +1,28 @@
 import Link from "next/link";
+import { Mail, ArrowUpRight } from "lucide-react";
+import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { profile } from "@/lib/data";
 import Reveal from "@/components/Reveal";
+import SpotlightCard from "@/components/SpotlightCard";
 
 const links = [
-  { label: "Email", href: `mailto:${profile.email}`, value: profile.email },
-  { label: "GitHub", href: profile.github, value: "github.com/jayem2305" },
+  {
+    label: "Email",
+    href: `mailto:${profile.email}`,
+    value: profile.email,
+    icon: Mail,
+  },
+  {
+    label: "GitHub",
+    href: profile.github,
+    value: "github.com/jayem2305",
+    icon: FaGithub,
+  },
   {
     label: "LinkedIn",
     href: profile.linkedin,
     value: "linkedin.com/in/jhon-mark-enrique",
+    icon: FaLinkedin,
   },
 ];
 
@@ -37,26 +51,35 @@ export default function Contact() {
               love to hear from you.
             </p>
 
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+            <div className="mt-8 grid gap-3 sm:grid-cols-3">
               {links.map((link) => (
-                <Link
-                  key={link.label}
-                  href={link.href}
-                  target={link.href.startsWith("http") ? "_blank" : undefined}
-                  rel={
-                    link.href.startsWith("http")
-                      ? "noopener noreferrer"
-                      : undefined
-                  }
-                  className="flex items-center gap-2 rounded-lg border border-border bg-background px-5 py-3 transition-colors hover:border-accent/40 hover:bg-surface-hover"
-                >
-                  <span className="text-sm font-medium text-muted">
-                    {link.label}
-                  </span>
-                  <span className="text-sm text-foreground">
-                    {link.value}
-                  </span>
-                </Link>
+                <SpotlightCard key={link.label} className="rounded-lg">
+                  <Link
+                    href={link.href}
+                    target={link.href.startsWith("http") ? "_blank" : undefined}
+                    rel={
+                      link.href.startsWith("http")
+                        ? "noopener noreferrer"
+                        : undefined
+                    }
+                    className="group flex h-full flex-col gap-3 rounded-lg border border-border bg-background px-5 py-4 transition-colors hover:border-accent/40 hover:bg-surface-hover"
+                  >
+                    <div className="flex items-center justify-between">
+                      <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-accent/10 text-accent-strong dark:text-accent">
+                        <link.icon className="h-4.5 w-4.5" />
+                      </span>
+                      <ArrowUpRight className="h-4 w-4 text-muted opacity-0 transition-opacity group-hover:opacity-100" />
+                    </div>
+                    <div>
+                      <p className="text-sm font-medium text-muted">
+                        {link.label}
+                      </p>
+                      <p className="truncate text-sm text-foreground">
+                        {link.value}
+                      </p>
+                    </div>
+                  </Link>
+                </SpotlightCard>
               ))}
             </div>
           </div>
